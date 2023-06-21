@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text scorText;
-
+    public Text BestScoreText;
     public GameObject gameoverPanel;
 
     //Đưa dữ liệu vào score
@@ -16,6 +16,16 @@ public class UIManager : MonoBehaviour
             scorText.text = txt;
         }
     }
+
+    // Đưa dữ liệu vào điểm số cao nhất
+    public void SetBestScoreText(string txt)
+    {
+        if (BestScoreText)
+        {
+            BestScoreText.text = txt;
+        }
+    }
+
     //Hiển thị gameoverpanel 
     public void ShowGameoverPanel(bool isShow)
     {

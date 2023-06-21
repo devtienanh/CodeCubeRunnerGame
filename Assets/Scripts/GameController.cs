@@ -8,8 +8,12 @@ public class GameController : MonoBehaviour
 
     public float spawnTime;
     float m_spawnTime;
-    int m_score;
+
+    int m_score;// biến để lưu điểm số cao nhất và tham chiếu đến GameoverPanel
     bool m_isGameover;
+
+    int m_highScore;
+    public GameObject gameoverPanel;
 
     UIManager m_ui;
     void Start()
@@ -17,6 +21,7 @@ public class GameController : MonoBehaviour
         m_spawnTime = 0;
         m_ui = FindObjectOfType<UIManager>();
         m_ui.SetScoreText("Score: " + m_score);
+        m_ui.SetBestScoreText("Best Score: " + PlayerPrefs.GetInt("BestScore", 0));
     }
 
     // Update is called once per frame
@@ -40,7 +45,7 @@ public class GameController : MonoBehaviour
     //Tạo chướng ngại vật
     public void SpawnObstacle()
     {
-        float randYpos = Random.Range(-1.8f,-0.7f);
+        float randYpos = Random.Range(-1.7f,-0.8f);
         //Vị trí tạo chướng ngại vật
         Vector2 spawnPos = new Vector2(9.6f,randYpos);
         if (obstacle)
@@ -75,6 +80,11 @@ public class GameController : MonoBehaviour
     public void SetGameoverState(bool state)
     {
         m_isGameover = state;
+        if (state && m_score > PlayerPrefs.GetInt("BestScore", 0))
+        {
+            PlayerPrefs.SetInt("BestScore", m_score);
+            m_ui.SetBestScoreText("Best Score: " + m_score);
+        }
     }
     //Replay game
     public void Replay()

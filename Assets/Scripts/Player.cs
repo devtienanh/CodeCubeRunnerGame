@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
      
     void Update()
     {
+        if (m_gc.IsGameover()) // Kiểm tra trạng thái game over từ GameController
+            return;
         //Nhảy
         bool isJumpKeyPressed = Input.GetKeyDown(KeyCode.Space);
         if (isJumpKeyPressed && m_isGround)
